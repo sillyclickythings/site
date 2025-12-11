@@ -1,27 +1,297 @@
-/* FONTS */
-@font-face {
-  font-family: "SillyFont";
-  src: url("/fonts/sillyfont.woff2") format("woff2");
-  font-display: swap;
+/* ================================
+   Silly Clicky Things – THEME
+   (Brand colours, components, frames)
+   ================================ */
+
+/* --- Brand variables --- */
+:root {
+    --sct-bg-dark: #000000;
+    --sct-landing-bg: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+
+    --sct-panel-bg: #020617;
+    --sct-game-panel-bg: #0f0f14;
+
+    --sct-text-main: #f9fafb;
+    --sct-text-sub: #9ca3af;
+    --sct-text-accent: #e879f9;
+
+    --sct-border-soft: rgba(148, 163, 184, 0.3);
+    --sct-border-game: rgba(255, 255, 255, 0.1);
+
+    --sct-glow-pink: rgba(236, 72, 153, 0.35);
+    --sct-glow-blue: rgba(59, 130, 246, 0.25);
+
+    --sct-font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* THEME VARIABLES */
-:root {
-  --font-main: "SillyFont", sans-serif;
-  --color-bg-default: #ffffff;
+/* 
+   Generic page wrapper for SCT dark pages.
+   Use on <body> or <main>:
+   <body class="sct-page">...</body>
+*/
+.sct-page {
+    min-height: 100vh;
+    padding: 1.5rem;
+    background: var(--sct-bg-dark);
+    color: var(--sct-text-main);
+    font-family: var(--sct-font-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-  /* Core colours */
-  --color-bg: #fffbe9;
-  --color-text: #6b4f2c;
-  --color-accent: #f6d6a9;
+/* Variant with fancy gradient background for the main landing page */
+.sct-landing-page {
+    background: var(--sct-landing-bg);
+}
 
-  /* Radii */
-  --radius: 12px;
+/* ======================================
+   Landing page container + layout
+   ====================================== */
 
-  /* Shadows */
-  --shadow-soft: 0 4px 10px rgba(0,0,0,0.1);
+.sct-container {
+    max-width: 540px;
+    width: 100%;
+    background: linear-gradient(145deg, #020617, #020617);
+    border-radius: 1.5rem;
+    padding: 2.2rem 2rem 2.4rem;
+    border: 1px solid var(--sct-border-soft);
+    box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.7);
+    position: relative;
+    overflow: hidden;
+}
 
-  body {
-  background: var(--color-bg, var(--color-bg-default));
+/* Soft glow behind container */
+.sct-glow {
+    position: absolute;
+    inset: -40%;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(232, 121, 249, 0.20), transparent 55%);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.sct-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Tagline pill at the top */
+.sct-tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+    background-color: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sct-text-sub);
+    margin-bottom: 1.4rem;
+}
+
+.sct-tagline-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: radial-gradient(circle, var(--sct-text-accent) 0, #22d3ee 100%);
+    box-shadow: 0 0 12px rgba(236, 72, 153, 0.8);
+}
+
+/* Heading + gradient accent */
+.sct-heading {
+    font-size: clamp(2.1rem, 4vw, 2.6rem);
+    margin-bottom: 0.75rem;
+}
+
+.sct-heading span {
+    background: linear-gradient(120deg, #f97316, #ec4899, #38bdf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Subheading / intro text */
+.sct-subtitle {
+    font-size: 0.98rem;
+    color: var(--sct-text-sub);
+    max-width: 30rem;
+    line-height: 1.6;
+    margin-bottom: 1.7rem;
+}
+
+/* CTA row (button + hint text) */
+.sct-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+/* Primary CTA button (used on landing page for Rabbit Paw link) */
+.sct-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid rgba(248, 250, 252, 0.12);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: #020617;
+    background: radial-gradient(circle at 0 0, #e0f2fe 0, #f97316 36%, #ec4899 82%);
+    box-shadow:
+        0 10px 35px rgba(249, 115, 22, 0.55),
+        0 0 0 1px rgba(15, 23, 42, 0.8);
+    transform: translateY(0);
+    transition:
+        transform 0.15s ease-out,
+        box-shadow 0.15s ease-out,
+        filter 0.15s ease-out;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sct-btn-primary:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow:
+        0 15px 45px rgba(248, 113, 113, 0.75),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+    filter: brightness(1.02);
+}
+
+.sct-btn-primary:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow:
+        0 6px 16px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.95);
+    filter: brightness(0.98);
+}
+
+.sct-btn-emoji {
+    font-size: 1.2rem;
+}
+
+.sct-hint {
+    font-size: 0.8rem;
+    color: var(--sct-text-sub);
+}
+
+/* Small footer note at the bottom of the landing card */
+.sct-footer-note {
+    margin-top: 2rem;
+    font-size: 0.78rem;
+    color: var(--sct-text-sub);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    opacity: 0.9;
+}
+
+.sct-footer-note span {
+    opacity: 0.85;
+}
+
+/* ======================================
+   Game frame styles (Rabbit Paw, CatXP…)
+   ====================================== */
+
+/* 
+   Use .sct-page on body for black background and centering.
+   Then wrap the game in .sct-game-frame.
+*/
+.sct-game-frame {
+    background: var(--sct-game-panel-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid var(--sct-border-game);
+    width: min(100%, 500px);
+    min-height: 520px; /* <- NEW: locks the frame size */
+    max-width: 420px;    /* prevents it from becoming too big */
+    min-width: 300px;    /* prevents it from collapsing on desktop */
+    box-shadow:
+        0 0 25px var(--sct-glow-pink),
+        0 0 55px var(--sct-glow-blue),
+        inset 0 0 12px rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Game title (inside game frame) */
+.sct-game-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(120deg, #f97316, #ec4899, #38bdf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+}
+
+.sct-message-wrap {
+  height: 6rem;          /* fixed height instead of min-height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Image/button for clicking (e.g. paw, cat, potato) */
+.sct-game-button {
+    width: 180px;
+    cursor: pointer;
+    transition: transform 0.1s ease, filter 0.2s ease;
+    border-radius: 18px;
+    display: block;
+    margin: 0 auto 1rem auto;
+    box-shadow: 0 0 25px var(--sct-glow-pink);
+}
+
+.sct-game-button:active {
+    transform: scale(0.93);
+    filter: brightness(0.95);
+}
+
+/* Counter text below the button */
+.sct-counter {
+    margin-top: 1.2rem;
+    font-size: 1.2rem;
+    color: var(--sct-text-accent);
+}
+
+/* Optional description / flavour text under title */
+.sct-game-subtitle {
+    font-size: 0.9rem;
+    color: var(--sct-text-sub);
+    margin-bottom: 1rem;
+}
+
+/* ======================================
+   Responsive tweaks
+   ====================================== */
+
+@media (max-width: 480px) {
+    .sct-container {
+        padding: 1.8rem 1.4rem 2.1rem;
+    }
+
+    .sct-game-frame {
+        padding: 1.8rem 1.4rem 2.1rem;
+    }
+}
+
+@media (max-width: 400px) {
+  #message.sct-counter {
+    font-size: 1rem;   /* slightly smaller on tiny screens */
   }
 }

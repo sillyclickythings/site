@@ -13,14 +13,35 @@
   <!-- Page-specific CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div id="container" class="center" style="flex-direction: column;">
-    <h1 id="game-title">Lucky Rabbit Paw</h1>
-    <p id="game-desc">Tap the magical rabbit’s paw for instant luck, sparkles, and positive vibes.</p>
-    <img id="paw" src="images/rabbit_paw.png" alt="White and Pink Rabbit Paw" />
-    <p id="message">Click the lucky rabbit's paw!</p>
+
+<body class="sct-page">
+  <!-- Game Frame -->
+  <div class="sct-game-frame">
+    <div id="container">
+      <div id="luck-badge">Luck: 0</div>
+      <h1 id="game-title" class="sct-game-title">Lucky Rabbit Paw 🐇</h1>
+
+      <p id="game-desc" class="sct-game-subtitle">
+        Tap the magical rabbit paw for instant luck, sparkles and positive vibes.
+      </p>
+
+      <img
+        id="paw"
+        src="images/rabbit_paw.png"
+        alt="White and Pink Rabbit Paw"
+        class="sct-game-button"
+      />
+
+      <div class="sct-message-wrap">
+        <p id="message" class="sct-counter">
+          Click the lucky rabbit's paw!
+        </p>
+        
+      </div>
+    </div>
   </div>
 
+  <script src="data/messages.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
