@@ -129,3 +129,18 @@ body {
   box-shadow: 0 0 8px rgba(255, 214, 240, 0.25);
   backdrop-filter: blur(2px);
 }
+
+/* Remove ugly tap highlight on mobile */
+html, body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#paw,
+.sct-game-button {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+#paw:focus {
+  outline: none;
+}

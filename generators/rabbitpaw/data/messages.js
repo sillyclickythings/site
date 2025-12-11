@@ -72,7 +72,7 @@ window.rabbitMessages = [
     "Your future self is cheering softly.",
     "Unexpected comfort approaches.",
     "Today’s version of you is enough.",
-    "Your spark is showing — in a good way.",
+    "Your spark is showing in a good way.",
     "Someone thinks you’re absolutely brilliant.",
     "A lucky ripple rolls outward from you.",
     "A quiet moment of joy is on the horizon.",
