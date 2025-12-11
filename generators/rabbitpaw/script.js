@@ -1,15 +1,4 @@
-const messages = [
-  "You gained +3 luck!",
-  "A cosmic rabbit approves of you.",
-  "Today will be unexpectedly delightful.",
-  "You found +1 invisible carrot.",
-  "Luck has been applied to your aura.",
-  "A tiny rabbit spirit cheers for you!",
-  "Your whimsy score increased.",
-  "The universe winks in your direction.",
-  "A bunny guardian watches approvingly.",
-  "You earned +5 rabbit points."
-];
+
 
 const container = document.getElementById("container");
 const paw = document.getElementById("paw");
@@ -18,6 +7,17 @@ const chimeSound = new Audio("sounds/chime.mp3");
 chimeSound.volume = 0.7;   // adjust loudness 0 to 1
 
 let rabbitEl = null;
+let messages = window.rabbitMessages;
+let luckClicks = Number(localStorage.getItem("rabbitLuckClicks")) || 0;
+
+function updateLuckBadge() {
+  const badge = document.getElementById("luck-badge");
+  if (badge) {
+    badge.textContent = `Luck: ${luckClicks}`;
+  }
+}
+updateLuckBadge();
+
 
 function showGifSparkle() {
   const sparkle = document.createElement("img");
@@ -84,13 +84,20 @@ function bounceRabbit() {
 
 
 paw.addEventListener("pointerdown", () => {
-  const random = Math.floor(Math.random() * messages.length);
 
+  const random = Math.floor(Math.random() * messages.length);
   chimeSound.currentTime = 0;  // rewind so it can play rapidly
   chimeSound.play();
 
-  message.textContent = messages[random];
+  if (navigator.vibrate) {
+    navigator.vibrate(20);
+  }
 
+  luckClicks++;
+  localStorage.setItem("rabbitLuckClicks", luckClicks);
+  updateLuckBadge();
+
+  message.textContent = messages[random];
   // message animation
   message.classList.remove("show");
   setTimeout(() => message.classList.add("show"), 10);
@@ -102,10 +109,8 @@ paw.addEventListener("pointerdown", () => {
     showGifSparkle();
 
     // tiny rabbit hop!
-  bounceRabbit();
+    bounceRabbit();
   }
-
-
 
 });
 
