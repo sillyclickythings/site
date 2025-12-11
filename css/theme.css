@@ -1,0 +1,22 @@
+/* FONTS */
+@font-face {
+  font-family: "SillyFont";
+  src: url("/fonts/sillyfont.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* THEME VARIABLES */
+:root {
+  --font-main: "SillyFont", sans-serif;
+
+  /* Core colours */
+  --color-bg: #fffbe9;
+  --color-text: #6b4f2c;
+  --color-accent: #f6d6a9;
+
+  /* Radii */
+  --radius: 12px;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 10px rgba(0,0,0,0.1);
+}
