@@ -8,6 +8,7 @@
 /* THEME VARIABLES */
 :root {
   --font-main: "SillyFont", sans-serif;
+  --color-bg-default: #ffffff;
 
   /* Core colours */
   --color-bg: #fffbe9;
@@ -19,4 +20,8 @@
 
   /* Shadows */
   --shadow-soft: 0 4px 10px rgba(0,0,0,0.1);
+
+  body {
+  background: var(--color-bg, var(--color-bg-default));
+  }
 }
