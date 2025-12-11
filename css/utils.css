@@ -1,0 +1,27 @@
+/* Center content */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hide elements */
+.hidden {
+  display: none;
+}
+
+/* Helpful reusable styling */
+.clickable {
+  cursor: pointer;
+}
+
+.rounded {
+  border-radius: var(--radius);
+}
+
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
