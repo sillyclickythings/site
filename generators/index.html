@@ -1,0 +1,19 @@
+<h1>Generators</h1>
+
+<p>
+Small, silly generators for mild amusement.
+</p>
+
+<ul>
+  <li><a href="/generators/rabbitspaw/">Rabbit’s Paw</a></li>
+</ul>
+
+<div id="site-footer"></div>
+
+<script>
+fetch('/includes/footer.html')
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById('site-footer').innerHTML = html;
+  });
+</script>

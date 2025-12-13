@@ -39,12 +39,11 @@
 
                     <p class="sct-subtitle">
                         Tiny pointless websites. Extremely important clicks.
-                        The games are brewing behind the scenes. Witches, frogs, blobs, potatoes, cats &amp; other oddities incoming. 🐸🐱
+                        The games are brewing behind the scenes. Witches, frogs, blobs, potatoes, cats &amp; other oddities incoming. 🐸🐱🐇
                     </p>
 
                     <div class="sct-cta-row">
                         <a class="sct-btn-primary" href="generators/rabbitpaw/index.html">
-                            <span class="sct-btn-emoji">🐇</span>
                             <span>Click the Lucky Rabbit Paw</span>
                         </a>
                         <span class="sct-hint">Start your lucky streak while we build the rest.</span>
@@ -57,14 +56,14 @@
                 </div>
             </div>
 
-            <footer class="sct-footer">
-                <a href="/privacy.html" target="_blank" rel="noopener">Privacy</a>
-                <span class="sep">•</span>
-                <a href="/terms.html" target="_blank" rel="noopener">Terms</a>
-                <span class="sep">•</span>
-                <a href="/contact.html" target="_blank" rel="noopener">Contact</a>
-            </footer>
-
+            <div id="site-footer"></div>
+            <script>
+                fetch('/includes/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('site-footer').innerHTML = html;
+                });
+            </script>
         </div>
     </main>
 </body>

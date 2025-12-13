@@ -13,10 +13,12 @@
 
     --sct-text-main: #f9fafb;
     --sct-text-sub: #9ca3af;
-    --sct-text-accent: #e879f9;
+    --sct-text-accent: #ffdcf0;
+    --sct-text-accent-hover: #ed09ed;
 
-    --sct-border-soft: rgba(148, 163, 184, 0.3);
-    --sct-border-game: rgba(255, 255, 255, 0.1);
+   --sct-border-soft: rgba(237, 9, 237, 0.45);
+    --sct-border-game: rgba(237, 9, 237, 0.50);
+
 
     --sct-glow-pink: rgba(236, 72, 153, 0.35);
     --sct-glow-blue: rgba(59, 130, 246, 0.25);
@@ -63,6 +65,11 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+}
+
+/* Wider layout for non-landing pages (About, games, generators) */
+.sct-page:not(.sct-landing-page) .sct-shell {
+  max-width: 980px;
 }
 
 /* ======================================
@@ -167,7 +174,10 @@
     font-size: 0.95rem;
     text-decoration: none;
     color: #020617;
-    background: radial-gradient(circle at 0 0, #e0f2fe 0, #f97316 36%, #ec4899 82%);
+    background: radial-gradient(circle at 0 0,
+    #f55a07 0,
+    #e76a48 40%,
+    #a809eb 85%);
     box-shadow:
         0 10px 35px rgba(249, 115, 22, 0.55),
         0 0 0 1px rgba(15, 23, 42, 0.8);
@@ -228,6 +238,7 @@
 .sct-game-frame {
     width: 100%;
     background: var(--sct-game-panel-bg);
+    border-width: 1.5px;
     border-radius: 20px;
     padding: 2rem;
     text-align: center;
@@ -267,6 +278,7 @@
     width: 180px;
     cursor: pointer;
     transition: transform 0.1s ease, filter 0.2s ease;
+    border: 1.5px solid rgba(237, 9, 237, 0.50);
     border-radius: 18px;
     display: block;
     margin: 0 auto 1rem auto;
@@ -307,19 +319,54 @@
 }
 
 .sct-footer a {
-    color: #ffd6f0;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
+  color: var(--sct-text-accent);
+  text-decoration: none;
+  transition: color 0.15s ease, opacity 0.15s ease;
 }
 
 .sct-footer a:hover {
-    opacity: 1;
+  color: var(--sct-text-accent-hover);
+  opacity: 1;
 }
 
 .sct-footer .sep {
     margin: 0 8px;
     opacity: 0.6;
 }
+
+/* Article-style content (About, Privacy, etc.) */
+.sct-article {
+  max-width:100ch;
+  margin: 0.75rem auto 0;
+  line-height: 1.7;
+  padding-bottom: 3rem;
+}
+
+.sct-article h2 {
+  margin-top: 3rem;
+}
+
+.sct-article p,
+.sct-article ul {
+  margin-top: 0.9rem;
+}
+
+/* Links inside content */
+.sct-content a,
+.sct-article a {
+  color: var(--sct-text-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.sct-content a:hover,
+.sct-article a:hover {
+  color: var(--sct-text-accent-hover);
+  opacity: 1;
+}
+
+
 
 /* ======================================
    Responsive tweaks
