@@ -20,6 +20,12 @@
   </url>
 
   <url>
+    <loc>https://sillyclickythings.com/about.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://sillyclickythings.com/privacy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
