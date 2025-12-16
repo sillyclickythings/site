@@ -1,27 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Charset -->
     <meta charset="UTF-8" />
+
+    <!-- Title -->
+    <title>Silly Clicky Things – Tiny Games, Pointless Buttons & Free Clicker Toys</title>
+
+    <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Silly Clicky Things</title>
 
-    <!-- counter.dev analytics -->
-    <script src="https://cdn.counter.dev/script.js"
-            data-id="0738f13f-0c45-4dc5-8912-f18d6766a843"
-            data-utcoffset="0"></script>
+    <!-- SEO -->
+    <meta name="description"
+          content="Silly Clicky Things is a growing collection of tiny, pointless games, oddly satisfying buttons and fun generators. Totally free. No downloads. No accounts. Just silly browser-based fun." />
+    <link rel="canonical" href="https://sillyclickythings.com/" />
+    <meta name="robots" content="index, follow" />
 
-    <!-- google search console -->
-    <meta name="google-site-verification" content="joAorAxKwzYep5JybdSaFzleef91tKhWqGm6ABCo9uM" />
+    <!-- Verification -->
+    <meta name="google-site-verification"
+          content="joAorAxKwzYep5JybdSaFzleef91tKhWqGm6ABCo9uM" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Silly Clicky Things" />
+    <meta property="og:title"
+          content="Silly Clicky Things – Tiny Games & Pointless Fun" />
+    <meta property="og:description"
+          content="Tiny, pointless games and silly generators. Totally free. No downloads. No accounts." />
+    <meta property="og:url" content="https://sillyclickythings.com/" />
+    <!-- Optional image later -->
+    <!-- <meta property="og:image" content="https://sillyclickythings.com/og/home.png" /> -->
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title"
+          content="Silly Clicky Things – Tiny Games & Pointless Fun" />
+    <meta name="twitter:description"
+          content="Tiny, pointless games and silly generators. Totally free. No downloads. No accounts." />
+    <!-- Optional image later -->
+    <!-- <meta name="twitter:image" content="https://sillyclickythings.com/og/home.png" /> -->
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Silly Clicky Things",
+      "url": "https://sillyclickythings.com/",
+      "description": "Silly Clicky Things is a growing collection of tiny, pointless games, oddly satisfying buttons and fun generators. Totally free. No downloads. No accounts. Just silly browser-based fun."
+    }
+    </script>
 
     <!-- Global CSS -->
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/theme.css">
     <link rel="stylesheet" href="/css/utils.css">
+
+    <!-- counter.dev analytics -->
+    <script src="https://cdn.counter.dev/script.js"
+            data-id="0738f13f-0c45-4dc5-8912-f18d6766a843"
+            data-utcoffset="0"></script>
 </head>
+
 <body class="sct-page sct-landing-page">
     <main class="sct-main">
         <div class="sct-shell">
-
+            <div id="site-header"></div>
             <div class="sct-container">
                 <div class="sct-glow" aria-hidden="true"></div>
 
@@ -43,7 +87,7 @@
                     </p>
 
                     <div class="sct-cta-row">
-                        <a class="sct-btn-primary" href="generators/rabbitpaw/index.html">
+                        <a class="sct-btn-primary" href="generators/tap-the-lucky-rabbit-paw/">
                             <span>Click the Lucky Rabbit Paw</span>
                         </a>
                         <span class="sct-hint">Start your lucky streak while we build the rest.</span>
@@ -56,15 +100,26 @@
                 </div>
             </div>
 
-            <div id="site-footer"></div>
-            <script>
-                fetch('/includes/footer.html')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('site-footer').innerHTML = html;
-                });
-            </script>
+            
         </div>
     </main>
+    <div id="site-footer"></div>
+        <script>
+        const headerEl = document.getElementById('site-header');
+        if (headerEl) {
+            fetch('/includes/header.html')
+            .then(r => r.text())
+            .then(html => { headerEl.innerHTML = html; })
+            .catch(err => console.error('Header include failed:', err));
+        }
+
+        const footerEl = document.getElementById('site-footer');
+        if (footerEl) {
+            fetch('/includes/footer.html')
+            .then(r => r.text())
+            .then(html => { footerEl.innerHTML = html; })
+            .catch(err => console.error('Footer include failed:', err));
+        }
+    </script>
 </body>
 </html>
