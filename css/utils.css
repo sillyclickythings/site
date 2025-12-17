@@ -1,27 +1,25 @@
-/* Center content */
-.center {
+/* === Utilities: behaviour only, no design === */
+
+.u-hidden {
+  display: none !important;
+}
+
+.u-clickable {
+  cursor: pointer;
+}
+
+.u-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Hide elements */
-.hidden {
-  display: none;
+/* Optional helpers */
+.u-nowrap {
+  white-space: nowrap;
 }
 
-/* Helpful reusable styling */
-.clickable {
-  cursor: pointer;
+.u-text-center {
+  text-align: center;
 }
 
-.rounded {
-  border-radius: var(--radius);
-}
-
-.card {
-  background: white;
-  padding: 1rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-soft);
-}

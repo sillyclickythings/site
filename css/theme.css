@@ -1,342 +1,461 @@
-/* ================================
-   Silly Clicky Things – THEME
-   (Brand colours, components, frames)
-   ================================ */
+/* =========================================================
+   Silly Clicky Things — THEME (theme.css)
+   =========================================================
+   GOAL (your diagram):
+   - Whole page is a 3-column grid:
+       [left empty for ads] [center content column] [right empty for ads]
+   - Center column is a 3-row layout:
+       Row 1: Header (LEFT aligned)
+       Row 2: Pretty frame (consistent width, never resizes)
+       Row 3: Footer (CENTER aligned)
+   - Header/Footer are injected via include.js into:
+       <div id="site-header"></div>
+       <div id="site-footer"></div>
 
-/* --- Brand variables --- */
+   IMPORTANT RULES (prevents chaos):
+   - Only ONE width controller: the center column max-width
+   - The frame (.sct-container) is always width:100%
+   - Landing page only changes background (not width/layout)
+   ========================================================= */
+
+
+/* =========================================================
+   1) DESIGN TOKENS (Colours, fonts, reusable values)
+   ========================================================= */
 :root {
-    --sct-bg-dark: #000000;
-    --sct-landing-bg: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+  /* Backgrounds */
+  --sct-bg-dark: #000000;
+  --sct-landing-bg: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+  --sct-panel-bg: #020617;
+  --sct-game-panel-bg: #0f0f14;
 
-    --sct-panel-bg: #020617;
-    --sct-game-panel-bg: #0f0f14;
+  /* Text */
+  --sct-text-main: #f9fafb;
+  --sct-text-sub: #9ca3af;
+  --sct-text-accent: #ffdcf0;
+  --sct-text-accent-hover: #ed09ed;
 
-    --sct-text-main: #f9fafb;
-    --sct-text-sub: #9ca3af;
-    --sct-text-accent: #ffdcf0;
-    --sct-text-accent-hover: #ed09ed;
+  /* Borders */
+  --sct-border-soft: rgba(237, 9, 237, 0.45);
+  --sct-border-game: rgba(237, 9, 237, 0.50);
 
-   --sct-border-soft: rgba(237, 9, 237, 0.45);
-    --sct-border-game: rgba(237, 9, 237, 0.50);
+  /* Glows */
+  --sct-glow-pink: rgba(236, 72, 153, 0.35);
+  --sct-glow-blue: rgba(59, 130, 246, 0.25);
 
-
-    --sct-glow-pink: rgba(236, 72, 153, 0.35);
-    --sct-glow-blue: rgba(59, 130, 246, 0.25);
-
-    --sct-font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Typography */
+  --sct-font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* 
-   Generic page wrapper for SCT dark pages.
-   Use on <body>:
-   <body class="sct-page">...</body>
+
+/* =========================================================
+   2) PAGE BASELINE (applies to ALL pages)
+   ========================================================= */
+/*
+  Use on <body>:
+  <body class="sct-page">...</body>
+
+  Optional variant for homepage only:
+  <body class="sct-page sct-landing-page">...</body>
+*/
+.sct-page {
+  margin: 0;
+  background: var(--sct-bg-dark);
+  color: var(--sct-text-main);
+  font-family: var(--sct-font-main);
+}
+
+/* Landing page changes ONLY background. Layout stays shared. */
+.sct-landing-page {
+  background: var(--sct-landing-bg);
+}
+
+
+/* =========================================================
+   3) LAYOUT (3 columns + center column 3 rows)
+   ========================================================= */
+/*
+  Expected HTML skeleton (ALL pages):
+  <body class="sct-page [sct-landing-page]">
+    <div class="sct-grid">
+      <aside class="sct-side"></aside>
+      <div class="sct-center">
+        <div id="site-header"></div>
+        <div class="sct-frame">
+          <div class="sct-container">
+            <div class="sct-glow" aria-hidden="true"></div>
+            <div class="sct-content"> ... </div>
+          </div>
+        </div>
+        <div id="site-footer"></div>
+      </div>
+      <aside class="sct-side"></aside>
+    </div>
+    <script src="/js/include.js"></script>
+  </body>
 */
 
-/* Page baseline */
-.sct-page {
-    margin: 0;
-    background: var(--sct-bg-dark);
-    color: var(--sct-text-main);
-    font-family: var(--sct-font-main);
+/* Full-page 3-column grid (left ad col / center / right ad col) */
+.sct-grid {
+  min-height: 100vh;
+  display: grid;
+
+  /* Center column is fixed-width; sides are flexible */
+  grid-template-columns: 1fr minmax(0, 900px) 1fr;
+
+  /* No accidental spacing; we can add later if needed */
+  gap: 0;
 }
 
-/* Landing page variant: just changes background, not layout */
-.sct-landing-page {
-    background: var(--sct-landing-bg);
+/* Side columns reserved for ads later (empty now) */
+.sct-side {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(236,72,153,0.06), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(59,130,246,0.05), transparent 45%);
 }
 
-/* Shared layout wrapper for ALL pages */
-.sct-main {
-    min-height: 100vh;
-    padding: 1.5rem;
-    box-sizing: border-box;
 
-    display: flex;
-    justify-content: center;   /* center the shell vertically */
+/* Center column: 3 rows (header / frame / footer) */
+.sct-center {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  /* Inner padding so the frame doesn’t touch edges */
+  padding: 1.5rem;
+  box-sizing: border-box;
 }
 
-/* Shell constrains width & centers all content (frame + footer) */
-.sct-shell {
-    width: 100%;
-    max-width: 540px;
-    margin: auto;
-    box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+/* The “frame wrapper” ensures consistent width and prevents shrink-to-fit */
+.sct-frame {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* Wider layout for non-landing pages (About, games, generators) */
-.sct-page:not(.sct-landing-page) .sct-shell {
-  max-width: 980px;
-}
 
-/* ======================================
-   Landing page container + layout
-   ====================================== */
+/* =========================================================
+   4) HEADER + FOOTER NAV (IDENTICAL look, different alignment)
+   ========================================================= */
+/*
+  Your requirement:
+  - Header: left aligned
+  - Footer: centered
+  But OTHERWISE identical colours, hover, separators, etc.
 
-/* Landing card */
-.sct-container {
-    width: 100%;
-    background: linear-gradient(145deg, #020617, #020617);
-    border-radius: 1.5rem;
-    padding: 2.2rem 2rem 2.4rem;
-    border: 1px solid var(--sct-border-soft);
-    box-shadow:
-        0 18px 45px rgba(15, 23, 42, 0.9),
-        0 0 0 1px rgba(15, 23, 42, 0.7);
-    position: relative;
-    overflow: hidden;
-}
+  Header include should output:
+  <header class="sct-header"> ... </header>
 
-/* Soft glow behind container */
-.sct-glow {
-    position: absolute;
-    inset: -40%;
-    background:
-        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.12), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(232, 121, 249, 0.20), transparent 55%);
-    opacity: 0.85;
-    pointer-events: none;
-    z-index: 0;
-}
+  Footer include should output:
+  <footer class="sct-footer"> ... </footer>
+*/
 
-.sct-content {
-    position: relative;
-    z-index: 1;
-}
-
-/* Tagline pill at the top */
-.sct-tagline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.25rem 0.8rem;
-    border-radius: 999px;
-    background-color: rgba(15, 23, 42, 0.9);
-    border: 1px solid rgba(148, 163, 184, 0.45);
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--sct-text-sub);
-    margin-bottom: 1.4rem;
-}
-
-.sct-tagline-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 999px;
-    background: radial-gradient(circle, var(--sct-text-accent) 0, #22d3ee 100%);
-    box-shadow: 0 0 12px rgba(236, 72, 153, 0.8);
-}
-
-/* Heading + gradient accent */
-.sct-heading {
-    font-size: clamp(2.1rem, 4vw, 2.6rem);
-    margin-bottom: 0.75rem;
-}
-
-.sct-heading span {
-    background: linear-gradient(120deg, #f97316, #ec4899, #38bdf8);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-/* Subheading / intro text */
-.sct-subtitle {
-    font-size: 0.98rem;
-    color: var(--sct-text-sub);
-    max-width: 30rem;
-    line-height: 1.6;
-    margin-bottom: 1.7rem;
-}
-
-/* CTA row (button + hint text) */
-.sct-cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.9rem;
-}
-
-/* Primary CTA button (used on landing page for Rabbit Paw link) */
-.sct-btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-    padding: 0.7rem 1.4rem;
-    border-radius: 999px;
-    border: 1px solid rgba(248, 250, 252, 0.12);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-    color: #020617;
-    background: radial-gradient(circle at 0 0,
-    #f55a07 0,
-    #e76a48 40%,
-    #a809eb 85%);
-    box-shadow:
-        0 10px 35px rgba(249, 115, 22, 0.55),
-        0 0 0 1px rgba(15, 23, 42, 0.8);
-    transform: translateY(0);
-    transition:
-        transform 0.15s ease-out,
-        box-shadow 0.15s ease-out,
-        filter 0.15s ease-out;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.sct-btn-primary:hover {
-    transform: translateY(-1px) scale(1.01);
-    box-shadow:
-        0 15px 45px rgba(248, 113, 113, 0.75),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-    filter: brightness(1.02);
-}
-
-.sct-btn-primary:active {
-    transform: translateY(0) scale(0.99);
-    box-shadow:
-        0 6px 16px rgba(15, 23, 42, 0.9),
-        0 0 0 1px rgba(15, 23, 42, 0.95);
-    filter: brightness(0.98);
-}
-
-.sct-btn-emoji {
-    font-size: 1.2rem;
-}
-
-.sct-hint {
-    font-size: 0.8rem;
-    color: var(--sct-text-sub);
-}
-
-/* Small footer note at the bottom of the landing card */
-.sct-footer-note {
-    margin-top: 2rem;
-    font-size: 0.78rem;
-    color: var(--sct-text-sub);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    opacity: 0.9;
-}
-
-.sct-footer-note span {
-    opacity: 0.85;
-}
-
-/* ======================================
-   Game frame styles (Rabbit Paw, CatXP…)
-   ====================================== */
-
-/* Game frame */
-.sct-game-frame {
-    width: 100%;
-    background: var(--sct-game-panel-bg);
-    border-width: 1.5px;
-    border-radius: 20px;
-    padding: 2rem;
-    text-align: center;
-    border: 1px solid var(--sct-border-game);
-    min-height: 520px;
-    box-shadow:
-        0 0 25px var(--sct-glow-pink),
-        0 0 55px var(--sct-glow-blue),
-        inset 0 0 12px rgba(255, 255, 255, 0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-}
-
-/* Game title (inside game frame) */
-.sct-game-title {
-    font-size: 1.6rem;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(120deg, #f97316, #ec4899, #38bdf8);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: 700;
-}
-
-.sct-message-wrap {
-    height: 6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-/* Image/button for clicking (e.g. paw, cat, potato) */
-.sct-game-button {
-    width: 180px;
-    cursor: pointer;
-    transition: transform 0.1s ease, filter 0.2s ease;
-    border: 1.5px solid rgba(237, 9, 237, 0.50);
-    border-radius: 18px;
-    display: block;
-    margin: 0 auto 1rem auto;
-    box-shadow: 0 0 25px var(--sct-glow-pink);
-}
-
-.sct-game-button:active {
-    transform: scale(0.93);
-    filter: brightness(0.95);
-}
-
-/* Counter text below the button */
-.sct-counter {
-    margin-top: 1.2rem;
-    font-size: 1.2rem;
-    color: var(--sct-text-accent);
-}
-
-/* Optional description / flavour text under title */
-.sct-game-subtitle {
-    font-size: 0.9rem;
-    color: var(--sct-text-sub);
-    margin-bottom: 1rem;
-}
-
-/* ======================================
-   Global footer (for all pages)
-   ====================================== */
-
+/* Shared “nav strip” styling */
+.sct-header,
 .sct-footer {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin: 2rem auto 1rem auto;
-    padding: 1rem 0;
-    opacity: 0.7;
-    font-size: 0.9rem;
+  display: block;
+  width: 100%;
+
+  padding: 1rem 0;
+  opacity: 0.7;
+  font-size: 0.9rem;
 }
 
+/* Alignment difference (only difference) */
+.sct-header { text-align: left; }
+.sct-footer { text-align: center; }
+
+/* Links in header/footer nav */
+.sct-header a,
 .sct-footer a {
   color: var(--sct-text-accent);
   text-decoration: none;
   transition: color 0.15s ease, opacity 0.15s ease;
 }
 
+.sct-header a:hover,
 .sct-footer a:hover {
   color: var(--sct-text-accent-hover);
   opacity: 1;
 }
 
+/* Separator dot */
+.sct-header .sep,
 .sct-footer .sep {
-    margin: 0 8px;
-    opacity: 0.6;
+  margin: 0 8px;
+  opacity: 0.6;
 }
 
-/* Article-style content (About, Privacy, etc.) */
+
+/* =========================================================
+   5) STANDARD “CARD FRAME” (used everywhere for the main content)
+   ========================================================= */
+/*
+  This is the pretty “panel” that must be consistent on every page.
+  It must never resize horizontally based on text changes.
+*/
+.sct-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  background: linear-gradient(145deg, #020617, #020617);
+  border-radius: 1.5rem;
+  padding: 2.2rem 2rem 2.4rem;
+
+  border: 1px solid var(--sct-border-soft);
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.7);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative glow behind container */
+.sct-glow {
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.12), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(232, 121, 249, 0.20), transparent 55%);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Content sits above glow */
+.sct-content {
+  position: relative;
+  z-index: 1;
+
+  /* Critical: prevents long text from forcing horizontal growth */
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   6) LANDING / PAGE HEADER UI (tagline, headings, CTA)
+   ========================================================= */
+/* Tagline pill */
+.sct-tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  background-color: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sct-text-sub);
+  margin-bottom: 1.4rem;
+}
+
+.sct-tagline-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--sct-text-accent) 0, #22d3ee 100%);
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.8);
+}
+
+/* Main heading */
+.sct-heading {
+  font-size: clamp(2.1rem, 4vw, 2.6rem);
+  margin-bottom: 0.75rem;
+}
+
+.sct-heading span {
+  background: linear-gradient(120deg, #f97316, #ec4899, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtitle / intro */
+.sct-subtitle {
+  font-size: 0.98rem;
+  color: var(--sct-text-sub);
+  max-width: 30rem;
+  line-height: 1.6;
+  margin-bottom: 1.7rem;
+}
+
+/* CTA row */
+.sct-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+/* Primary CTA button */
+.sct-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.12);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: #020617;
+
+  background: radial-gradient(circle at 0 0,
+    #f55a07 0,
+    #e76a48 40%,
+    #a809eb 85%);
+
+  box-shadow:
+    0 10px 35px rgba(249, 115, 22, 0.55),
+    0 0 0 1px rgba(15, 23, 42, 0.8);
+
+  transform: translateY(0);
+  transition:
+    transform 0.15s ease-out,
+    box-shadow 0.15s ease-out,
+    filter 0.15s ease-out;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sct-btn-primary:hover {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow:
+    0 15px 45px rgba(248, 113, 113, 0.75),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  filter: brightness(1.02);
+}
+
+.sct-btn-primary:active {
+  transform: translateY(0) scale(0.99);
+  box-shadow:
+    0 6px 16px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.95);
+  filter: brightness(0.98);
+}
+
+.sct-btn-emoji {
+  font-size: 1.2rem;
+}
+
+.sct-hint {
+  font-size: 0.8rem;
+  color: var(--sct-text-sub);
+}
+
+
+/* =========================================================
+   7) “FOOTER NOTE” (small row inside the card, not the global footer)
+   ========================================================= */
+.sct-footer-note {
+  margin-top: 2rem;
+  font-size: 0.78rem;
+  color: var(--sct-text-sub);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0.9;
+}
+
+.sct-footer-note span {
+  opacity: 0.85;
+}
+
+
+/* =========================================================
+   8) GAME PANEL (Rabbit Paw, CatXP…)
+   ========================================================= */
+/*
+  IMPORTANT: Put the game panel INSIDE .sct-content so the outer
+  frame remains consistent across all pages.
+*/
+.sct-game-frame {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  background: var(--sct-game-panel-bg);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid var(--sct-border-game);
+
+  min-height: 520px;
+
+  box-shadow:
+    0 0 25px var(--sct-glow-pink),
+    0 0 55px var(--sct-glow-blue),
+    inset 0 0 12px rgba(255, 255, 255, 0.05);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+/* Game title */
+.sct-game-title {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(120deg, #f97316, #ec4899, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+/* Fixed-height message area: prevents layout jump vertically */
+.sct-message-wrap {
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Button image */
+.sct-game-button {
+  width: 180px;
+  cursor: pointer;
+  transition: transform 0.1s ease, filter 0.2s ease;
+  border: 1.5px solid rgba(237, 9, 237, 0.50);
+  border-radius: 18px;
+  display: block;
+  margin: 0 auto 1rem auto;
+  box-shadow: 0 0 25px var(--sct-glow-pink);
+}
+
+.sct-game-button:active {
+  transform: scale(0.93);
+  filter: brightness(0.95);
+}
+
+/* Counter text */
+.sct-counter {
+  margin-top: 1.2rem;
+  font-size: 1.2rem;
+  color: var(--sct-text-accent);
+}
+
+/* Subtitle */
+.sct-game-subtitle {
+  font-size: 0.9rem;
+  color: var(--sct-text-sub);
+  margin-bottom: 1rem;
+}
+
+
+/* =========================================================
+   9) ARTICLE CONTENT (About, Privacy, Terms, etc.)
+   ========================================================= */
 .sct-article {
-  max-width:100ch;
+  max-width: 100ch;
   margin: 0.75rem auto 0;
   line-height: 1.7;
   padding-bottom: 3rem;
@@ -351,7 +470,7 @@
   margin-top: 0.9rem;
 }
 
-/* Links inside content */
+/* Links inside content blocks */
 .sct-content a,
 .sct-article a {
   color: var(--sct-text-accent);
@@ -367,25 +486,33 @@
 }
 
 
-
-/* ======================================
-   Responsive tweaks
-   ====================================== */
-
+/* =========================================================
+   10) RESPONSIVE TWEAKS
+   ========================================================= */
 @media (max-width: 480px) {
-    .sct-container {
-        padding: 1.8rem 1.4rem 2.1rem;
-        margin-top: 2rem;
-    }
+  /* On small screens we effectively “collapse” the ad columns */
+  .sct-grid {
+    grid-template-columns: 1fr; /* one column */
+  }
 
-    .sct-game-frame {
-        padding: 1.8rem 1.4rem 2.1rem;
-        margin-top: 2rem;
-    }
+  /* Center column padding */
+  .sct-center {
+    padding: 1.25rem;
+  }
+
+  .sct-container {
+    padding: 1.8rem 1.4rem 2.1rem;
+    margin-top: 0; /* grid already controls vertical flow */
+  }
+
+  .sct-game-frame {
+    padding: 1.8rem 1.4rem 2.1rem;
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 400px) {
-    #message.sct-counter {
-        font-size: 1rem;
-    }
+  #message.sct-counter {
+    font-size: 1rem;
+  }
 }

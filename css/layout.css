@@ -1,0 +1,46 @@
+/* =========================================================
+   Silly Clicky Things — LAYOUT (layout.css)
+   3 columns + center column 3 rows
+   ========================================================= */
+
+/* Full-page 3-column grid (left ad col / center / right ad col) */
+.sct-grid {
+  min-height: 100vh;
+  display: grid;
+
+  /* Center column is fixed-width; sides are flexible */
+  grid-template-columns: 1fr minmax(0, 900px) 1fr;
+
+  /* No accidental spacing; we can add later if needed */
+  gap: 0;
+}
+
+/* Side columns reserved for ads later (empty now) */
+.sct-side {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(236,72,153,0.06), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(59,130,246,0.05), transparent 45%);
+}
+
+/* Center column: 3 rows (header / frame / footer) */
+.sct-center {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  /* Inner padding so the frame doesn’t touch edges */
+  padding: 1.5rem;
+  box-sizing: border-box;
+
+  /* NEW: consistent vertical spacing between header / frame / footer */
+  gap: 1.25rem;
+}
+
+/* The “frame wrapper” ensures consistent width and prevents shrink-to-fit */
+.sct-frame {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  /* NEW: vertically center the frame in the middle (1fr) row */
+  align-self: center;
+}

@@ -1,14 +1,10 @@
-/* Basic reset */
-* {
+.sct-page {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  background: var(--sct-bg-dark);
+  color: var(--sct-text-main);
+  font-family: var(--sct-font-main);
 }
 
-/* Default body layout */
-body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-main);
-  line-height: 1.5;
+.sct-landing-page {
+  background: var(--sct-landing-bg);
 }

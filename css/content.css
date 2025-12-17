@@ -1,0 +1,36 @@
+/* =========================================================
+   Silly Clicky Things — CONTENT (content.css)
+   Article content (About, Privacy, Terms, etc.)
+   ========================================================= */
+
+.sct-article {
+  max-width: 100ch;
+  margin: 0.75rem auto 0;
+  line-height: 1.7;
+  padding-bottom: 3rem;
+}
+
+.sct-article h2 {
+  margin-top: 3rem;
+}
+
+.sct-article p,
+.sct-article ul {
+  margin-top: 0.9rem;
+}
+
+/* Links inside content blocks */
+.sct-content a,
+.sct-article a {
+  color: var(--sct-text-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.sct-content a:hover,
+.sct-article a:hover {
+  color: var(--sct-text-accent-hover);
+  opacity: 1;
+}
+

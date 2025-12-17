@@ -1,0 +1,32 @@
+/* =========================================================
+   Silly Clicky Things — RESPONSIVE (responsive.css)
+   ========================================================= */
+
+@media (max-width: 480px) {
+  /* On small screens we effectively “collapse” the ad columns */
+  .sct-grid {
+    grid-template-columns: 1fr; /* one column */
+  }
+
+  /* Center column padding */
+  .sct-center {
+    padding: 1.25rem;
+  }
+
+  .sct-container {
+    padding: 1.8rem 1.4rem 2.1rem;
+    margin-top: 0; /* grid already controls vertical flow */
+  }
+
+  .sct-game-frame {
+    padding: 1.8rem 1.4rem 2.1rem;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  #message.sct-counter {
+    font-size: 1rem;
+  }
+}
+

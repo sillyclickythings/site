@@ -1,0 +1,56 @@
+/* =========================================================
+   Silly Clicky Things — SITE SHELL (site-shell.css)
+   Header + Footer nav (identical look, different alignment)
+   ========================================================= */
+
+/* Shared “nav strip” styling */
+.sct-header,
+.sct-footer {
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+
+  /* Use colour for subtlety, NOT opacity (opacity darkens everything inside) */
+  color: var(--sct-text-sub);
+}
+
+/* Alignment difference (only difference) */
+.sct-header { text-align: left; }
+.sct-footer { text-align: center; }
+
+/* Links in header/footer nav */
+.sct-header a,
+.sct-footer a {
+  color: var(--sct-text-accent);
+  text-decoration: none;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.sct-header a:hover,
+.sct-footer a:hover {
+  color: var(--sct-text-accent-hover);
+  opacity: 1;
+}
+
+/* Separator dot */
+.sct-header .sep,
+.sct-footer .sep {
+  margin: 0 8px;
+  opacity: 0.6;
+}
+
+/* Header / footer link states — fully locked */
+.sct-header a,
+.sct-header a:visited,
+.sct-footer a,
+.sct-footer a:visited {
+  color: var(--sct-text-accent);
+}
+
+.sct-header a:hover,
+.sct-footer a:hover {
+  color: var(--sct-text-accent-hover);
+}
+
+
