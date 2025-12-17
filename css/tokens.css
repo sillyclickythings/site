@@ -1,0 +1,24 @@
+:root {
+  /* Backgrounds */
+  --sct-bg-dark: #000000;
+  --sct-landing-bg: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+  --sct-panel-bg: #020617;
+  --sct-game-panel-bg: #0f0f14;
+
+  /* Text */
+  --sct-text-main: #f9fafb;
+  --sct-text-sub: #9ca3af;
+  --sct-text-accent: #ffdcf0;
+  --sct-text-accent-hover: #ed09ed;
+
+  /* Borders */
+  --sct-border-soft: rgba(237, 9, 237, 0.45);
+  --sct-border-game: rgba(237, 9, 237, 0.50);
+
+  /* Glows */
+  --sct-glow-pink: rgba(236, 72, 153, 0.35);
+  --sct-glow-blue: rgba(59, 130, 246, 0.25);
+
+  /* Typography */
+  --sct-font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}

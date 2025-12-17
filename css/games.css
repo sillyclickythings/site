@@ -1,0 +1,84 @@
+/* =========================================================
+   Silly Clicky Things — GAMES (games.css)
+   Game panel (Rabbit Paw, CatXP…)
+   ========================================================= */
+
+/*
+  IMPORTANT: Put the game panel INSIDE .sct-content so the outer
+  frame remains consistent across all pages.
+*/
+.sct-game-frame {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  background: var(--sct-game-panel-bg);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid var(--sct-border-game);
+
+  min-height: 520px;
+
+  box-shadow:
+    0 0 25px var(--sct-glow-pink),
+    0 0 55px var(--sct-glow-blue),
+    inset 0 0 12px rgba(255, 255, 255, 0.05);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+/* Game title */
+.sct-game-title {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(120deg, #f97316, #ec4899, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+/* Fixed-height message area: prevents layout jump vertically */
+.sct-message-wrap {
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Button image */
+.sct-game-button {
+  width: 180px;
+  cursor: pointer;
+  transition: transform 0.1s ease, filter 0.2s ease;
+  border: 1.5px solid rgba(237, 9, 237, 0.50);
+  border-radius: 18px;
+  display: block;
+  margin: 0 auto 1rem auto;
+  box-shadow: 0 0 25px var(--sct-glow-pink);
+}
+
+.sct-game-button:active {
+  transform: scale(0.93);
+  filter: brightness(0.95);
+}
+
+/* Counter text */
+.sct-counter {
+  margin-top: 1.2rem;
+  font-size: 1.2rem;
+  color: var(--sct-text-accent);
+}
+
+/* Subtitle */
+.sct-game-subtitle {
+  font-size: 0.9rem;
+  color: var(--sct-text-sub);
+  margin-bottom: 1rem;
+}
+
