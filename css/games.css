@@ -82,3 +82,14 @@
   margin-bottom: 1rem;
 }
 
+/* Badge in top-right corner */
+.sct-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  font-size: 0.85rem;
+  opacity: 0.85;
+  text-align: right;
+}
+

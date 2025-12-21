@@ -8,7 +8,7 @@ chimeSound.volume = 0.7;
 
 const STORAGE_KEY = "mildly-encouraging-robot-clicks";
 const SLEEP_DELAY = 10000; // 10 seconds
-const SMILE_DURATION = 350; // ms – long enough to notice
+const SMILE_DURATION = 700; // ms – long enough to notice
 
 // image paths
 const ROBOT_NEUTRAL = "images/eye-roll-robot.png";
@@ -23,9 +23,14 @@ let sleepTimer = null;
 // helpers
 // --------------------
 
+
 function updateBadge() {
-  if (badge) badge.textContent = `Luck: ${userClicks}`;
+  const badge = document.getElementById("badge");
+  if (badge) {
+    badge.textContent = `Input: ${userClicks}`;
+  }
 }
+updateBadge();
 
 function setRobot(src) {
   if (robot.src.endsWith(src)) return;
