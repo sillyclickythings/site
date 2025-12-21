@@ -8,7 +8,7 @@
   /* Text */
   --sct-text-main: #f9fafb;
   --sct-text-sub: #9ca3af;
-  --sct-text-accent: #ffdcf0;
+  --sct-text-accent: #dce6f5;
   --sct-text-accent-hover: #ed09ed;
 
   /* Borders */
@@ -21,4 +21,9 @@
 
   /* Typography */
   --sct-font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Frame sizing */
+  --sct-frame-min-height: auto;          /* default: content-sized */
+  --sct-frame-min-height-tall: 60vh;     /* tall panels */
+
 }

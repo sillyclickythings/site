@@ -44,3 +44,7 @@
   /* NEW: vertically center the frame in the middle (1fr) row */
   align-self: center;
 }
+
+.sct-spacer {
+  height: 1.25rem;
+}
