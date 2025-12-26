@@ -1,0 +1,112 @@
+#game-title {
+  font-size: 2.2rem;
+  color: #d6d9ff;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 0 10px rgba(255, 214, 240, 0.5);
+}
+
+#game-desc {
+  font-size: 1.1rem;
+  color: #d6d9ff;
+  margin-bottom: 1.8rem;
+  opacity: 0.95;
+}
+
+/* Force a strict 3 × N grid */
+.sct-ascii-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* ALWAYS 3 columns */
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Square tiles – all identical size */
+.sct-ascii-tile {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  background: linear-gradient(180deg, #1e1f24, #14151a);
+  border-radius: 16px;
+
+  /* NO real border */
+  border: none;
+
+  /* fake 3D sides + base */
+  box-shadow:
+    0 10px 0 #68686e,          /* bottom face */
+    0 0 0 2px rgba(255,255,255,0.18), /* thin outline */
+    0 14px 22px rgba(65, 1, 113, 0.55),     /* drop shadow */
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+  cursor: pointer;
+
+  transition:
+    transform 90ms ease,
+    box-shadow 90ms ease,
+    background 90ms ease;
+}
+
+/* Press-down: collapse the base */
+.sct-ascii-tile:active {
+  transform: translateY(10px);
+
+  background: linear-gradient(180deg, #262833, #1a1c25);
+
+  box-shadow:
+    0 2px 0 #0f1018,           /* collapsed base */
+    0 0 0 2px rgba(255,255,255,0.22),
+    inset 0 0 0 2px rgba(255,255,255,0.2);
+}
+
+
+
+/* ASCII art clipped + centred */
+.sct-ascii-art {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  font-size: 15px;
+  line-height: 1.15;
+  white-space: pre;
+
+  color: #f2f3f7;
+  user-select: none;
+  text-align: center;
+}
+
+/* Copied indicator */
+.sct-ascii-tile.copied::after {
+  content: "Copied!";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  border-radius: 16px;
+}
+
+/* Mobile: switch to 2 columns */
+@media (max-width: 640px) {
+  .sct-ascii-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
