@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <link rel="stylesheet" href="/css/main.css" />
-  <!-- Page-specific CSS -->
   <link rel="stylesheet" href="style.css" />
 
   <title>Cute ASCII Cats – Free Copy & Paste Cat Text Art</title>
 
   <!-- SEO -->
   <meta name="description" content="Cute ASCII cats you can instantly copy and paste. Free cat text art, keyboard cats and adorable ASCII designs for messages, profiles and fun." />
-  <link rel="canonical" href="https://sillyclickythings.com/free/ascii-art/cats/cute-ascii-cat/" />
+  <link rel="canonical" href="https://sillyclickythings.com/free-ascii-art/cats/cute-ascii-cat/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -54,34 +54,22 @@
           <div class="sct-content">
             <div class="sct-game-frame">
               <div id="container">
-                 <div id="badge">Input: 0</div>
 
                 <h1 id="game-title" class="sct-game-title">
                   Cute ASCII Cats
+                </h1>
 
                 <p id="game-desc" class="sct-game-subtitle">
-                  Free cute ASCII cat art to copy and paste. Perfect for messages, profiles, bios, comments and anywhere you want a little cat energy.
-                  Click a cat to copy it instantly and make it meow! Paste anywhere 🐾</p>
+                  Free cute ASCII cat art to copy and paste. Click a cat to copy it instantly and make it meow 🐾
+                </p>
 
-                 <!-- Tiles grid -->
-                <div id="cat-tiles" class="sct-ascii-tiles" aria-label="ASCII cat tiles">
-                  <!-- One cat per tile. Script will copy the text inside the tile. -->
-                  <button class="sct-ascii-tile" type="button" data-sound="/sounds/meow1.mp3">
-                    <pre class="sct-ascii-art">(=^.^=)</pre>
-                  </button>
+                <!-- Tiles injected by script.js -->
+                <div
+                  id="cat-tiles"
+                  class="sct-ascii-tiles"
+                  aria-label="ASCII cat tiles"
+                ></div>
 
-                  <button class="sct-ascii-tile" type="button" data-sound="/sounds/meow2.mp3">
-                    <pre class="sct-ascii-art">/\_/\ 
-( o.o )
- > ^ <</pre>
-                  </button>
-
-                  <button class="sct-ascii-tile" type="button" data-sound="/sounds/meow3.mp3">
-                    <pre class="sct-ascii-art">(=｀ω´=)</pre>
-                  </button>
-
-                  <!-- add more tiles here -->
-                </div>
               </div>
             </div>
           </div>
@@ -100,9 +88,9 @@
   </div>
 
   <script src="/js/include.js"></script>
-
-  <!-- Game scripts -->
-  <script src="data/messages.js"></script>
-  <script src="script.js"></script>
+  <!-- Sound -->
+  <script src="/js/sound.js" defer></script> 
+  <!-- Page logic -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>

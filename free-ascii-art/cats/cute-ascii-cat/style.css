@@ -1,108 +1,112 @@
-
-
-#container {
-  text-align: center;
-  position: relative;
-  padding: 2rem;
-}
-
-/* ButtonImage: auto size + glow + squish-ready */
-#buttonImage {
-  max-width: min(70vw, 260px);      /* auto size, good on mobile & desktop */
-  height: auto;
-  cursor: pointer;
-  user-select: none;
-  transition: transform 0.1s ease, filter 0.2s ease;
-  filter: drop-shadow(0 0 10px rgba(255, 190, 220, 0.7));
-}
-
-#buttonImage:hover {
-  filter: drop-shadow(0 0 16px rgba(255, 200, 230, 0.9));
-}
-
-/* Squish on click */
-#buttonImage:active {
-  transform: scale(0.93);
-  filter: drop-shadow(0 0 6px rgba(255, 170, 210, 0.7));
-}
-
 #game-title {
   font-size: 2.2rem;
-  color: #d6d9ff;                  
+  color: #d6d9ff;
   margin-bottom: 0.4rem;
   text-shadow: 0 0 10px rgba(255, 214, 240, 0.5);
 }
 
 #game-desc {
   font-size: 1.1rem;
-  color: #d6d9ff;               
-  margin-bottom: 1.8rem;           /* give nice space before the buttonImage */
+  color: #d6d9ff;
+  margin-bottom: 1.8rem;
   opacity: 0.95;
 }
 
-.sct-message-wrap {
+/* Force a strict 3 × N grid */
+.sct-ascii-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* ALWAYS 3 columns */
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Square tiles – all identical size */
+.sct-ascii-tile {
+  position: relative;
   width: 100%;
+  aspect-ratio: 1 / 1;
+
+  background: linear-gradient(180deg, #1e1f24, #14151a);
+  border-radius: 16px;
+
+  /* NO real border */
+  border: none;
+
+  /* fake 3D sides + base */
+  box-shadow:
+    0 10px 0 #68686e,          /* bottom face */
+    0 0 0 2px rgba(255,255,255,0.18), /* thin outline */
+    0 14px 22px rgba(65, 1, 113, 0.55),     /* drop shadow */
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
   display: flex;
-  justify-content: center; /* centers the message block */
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+  cursor: pointer;
+
+  transition:
+    transform 90ms ease,
+    box-shadow 90ms ease,
+    background 90ms ease;
 }
 
-#message {
-  font-size: 1.4rem;
-  color: #d6d9ff;
-  width: min(520px, 100%);   /* stable width, responsive */
-  margin: 1rem auto 0;
+/* Press-down: collapse the base */
+.sct-ascii-tile:active {
+  transform: translateY(10px);
+
+  background: linear-gradient(180deg, #262833, #1a1c25);
+
+  box-shadow:
+    0 2px 0 #0f1018,           /* collapsed base */
+    0 0 0 2px rgba(255,255,255,0.22),
+    inset 0 0 0 2px rgba(255,255,255,0.2);
+}
+
+
+
+/* ASCII art clipped + centred */
+.sct-ascii-art {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  font-size: 15px;
+  line-height: 1.15;
+  white-space: pre;
+
+  color: #f2f3f7;
+  user-select: none;
   text-align: center;
-
-  /* IMPORTANT for <pre> */
-  white-space: pre-wrap;     /* wraps lines */
-  word-break: break-word;    /* breaks long words if needed */
-
-  /* optional: make it feel like the rabbit one */
-  padding: 12px 14px;
-  border-radius: 14px;
-}
-/*
-#message {
-  font-size: 1.7rem;
-  margin-top: 1rem;
-  color: #d6d9ff;
-   transform: scale(0.9);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-*/
-#message.show {
-  opacity: 1;
-  transform: scale(1);
-  text-shadow: 0 0 8px rgba(252, 233, 245, 0.6);
 }
 
-
-#badge {
+/* Copied indicator */
+.sct-ascii-tile.copied::after {
+  content: "Copied!";
   position: absolute;
-  top: -5px;
-  right: 10px;
-  padding: 6px 12px;
-  border-radius: 14px;
-  background: rgba(255, 214, 240, 0.1);
-  border: 1px solid rgba(255, 214, 240, 0.3);
-  color: #d6d9ff;
+  inset: 0;
+  display: grid;
+  place-items: center;
   font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: 0 0 8px rgba(255, 214, 240, 0.25);
-  backdrop-filter: blur(2px);
+  font-weight: 600;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  border-radius: 16px;
 }
 
-/* Remove ugly tap highlight on mobile */
-html, body {
-  -webkit-tap-highlight-color: transparent;
-}
-
-#buttonImage,
-.sct-game-button {
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-}
-
-#buttonImage:focus {
-  outline: none;
+/* Mobile: switch to 2 columns */
+@media (max-width: 640px) {
+  .sct-ascii-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
